@@ -1,0 +1,50 @@
+search calle 13
+search limon
+cd /home/javo/Workspace/Python/
+rename p
+rename self_study
+cd 
+shell tar xvf %
+shell mkdir 
+shell tar xvf
+open_with 
+shell makepkg -s
+shell makepkg
+shell tar xvf %s
+search .xinitrc
+search .xini
+search rc.conf
+find rc.conf
+find /etc/rc.conf
+search /etc/rc
+cd /etc/udev/rules.d/
+search 
+cd /
+shell mkdir -p www/{joomla,magento,wordpress,ci}
+shell 
+mkdir bash
+shell mv %s python
+mkdir php
+mkdir test1
+shell mkdir -p test1/www
+touch index.php
+touch 
+touch ./index.php
+touch %s/imdex.php
+delete 
+touch www/index.php
+mkdir vhosts
+mkdir web_tools
+shell ln -s ~/A
+shell ~
+cd /home/javo/Documents
+cd /home/javo/Workspace/www/php/test1
+mkdir v
+mkdir var/log
+delete seriously? y
+shell mkdir -p var/log
+touch 403.php
+mkdir errors
+touch 404.php
+Q
+

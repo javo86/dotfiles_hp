@@ -1,0 +1,93 @@
+	Pasos para instalar y preparar hp
+instalar según wiki
+
+Gotchas:
+	wireless:
+		https://wiki.archlinux.org/index.php/Broadcom_wireless
+		https://wiki.archlinux.org/index.php/Automatic_login_to_virtual_console
+packages:
+	pacman:
+		pacman -S rxvt-unicode gvim cairo-compmgr conky tint2 colordiff dmenu tmux mutt newsbeuter wpa_actiond mpd ncmpcpp openbox acpid lm_sensors feh imagemagick libreoffice firefox weechat bitlbee laptop-mode-tools lxappearance obconf ttf-inconsolata bash-completion  gimp-devel inkscape pm-utils lesspipe
+	yaourt:
+		pacman-color
+		mingetty
+		archey
+Downloads:
+	fonts:
+		http://uploaded.to/file/2mmzjzjp
+
+Daemons:
+hwclock @syslog-ng @alsa @laptop-mode net-auto-wireless @acpid !network @netfs @crond
+
+
+packages:
+	System:
+		terminal emulator:
+			urxvt
+		dotfiles:
+			repos en git:
+				dotvim
+				dotfiles
+		Power Management:
+			laptop-mode-tools
+			acpid
+		System monitor:
+			conky
+			lm_sensor
+		X:
+			openbox
+			tint2
+		Network:
+			netcfg2:
+				wpa_actiond
+		Misc:
+			git
+			lxappearance
+			obconf
+			dmenu
+			tmux
+	Media:
+		feh
+		imagemagick
+		mpd
+		ncmpcpp
+		mplayer
+	www:
+		weechat
+		bitlbee
+		newsbeuter
+		elinks
+		firefox:
+			noscript
+			delicious
+			web tools
+			measure it
+			vimperator
+			colorzilla
+			firebug
+	Devel:
+		python2
+		Web:
+			LAMP:
+				apache2
+				php
+				mysql
+				mod_wsgi
+			Web-Tools:
+				Magento
+				Joomla
+				Drupal
+				Django
+				CI
+				Wordpress
+	Office:
+		[G]vim
+		libreoffice:
+			diccionarios español:
+	Diseño:
+		Web:
+			inkscape
+			gimp
+
+	Optional:
+		awesome

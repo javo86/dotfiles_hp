@@ -1,0 +1,118 @@
+#---------------------------------------------
+# TINT2 CONFIG FILE
+#---------------------------------------------
+
+#---------------------------------------------
+# BACKGROUND AND BORDER
+#---------------------------------------------   
+
+rounded = 0
+border_width = 0
+background_color = #696969 100
+border_color = #ffffff 20
+
+rounded = 0
+border_width = 0
+background_color = #4F4F4F 100
+border_color = #ffffff 20
+
+rounded = 0
+border_width = 0
+background_color = #1C1C1C 100
+border_color = #ffffff 20
+
+rounded = 0
+border_width = 1
+background_color = #363636 100
+border_color = #ffffff 20
+
+#---------------------------------------------
+# PANEL
+#---------------------------------------------
+panel_monitor = all
+panel_position = bottom center horizontal
+panel_size = 100% 38
+panel_margin = 0 0
+panel_padding = 5 3 5
+font_shadow = 0
+panel_background_id = 3
+wm_menu = 1
+panel_dock = 0
+
+#---------------------------------------------
+# TASKBAR
+#---------------------------------------------
+taskbar_mode = multi_desktop
+taskbar_padding = 2 2 2
+taskbar_background_id = 4
+taskbar_active_background_id = 2
+
+#---------------------------------------------
+# TASKS
+#---------------------------------------------
+urgent_nb_of_blink = 10
+task_icon = 1
+task_text = 0
+task_width = 50
+task_centered = 1
+task_padding = 2 1
+task_font = sans 7
+task_font_color = #FFE1E3 70
+task_active_font_color = #FFE1E3 85
+task_background_id = 0
+task_active_background_id = 1
+#task_icon_asb = 20 20 50
+#task_active_icon_asb = 50 50 100
+
+#---------------------------------------------
+# TOOLTIPS
+#---------------------------------------------
+tooltip = 1
+tooltip_padding = 0 0
+tooltip_show_timeout = 0
+tooltip_hide_timeout = 0
+tooltip_background_id = 2
+tooltip_font = Sans 10
+tooltip_font_color = #D3D3D3 60
+
+#---------------------------------------------
+# SYSTRAYBAR
+#---------------------------------------------
+systray = 1
+systray_padding = 2 2 2
+systray_background_id = 4
+systray_sort = ascending
+
+#---------------------------------------------
+# CLOCK
+#---------------------------------------------
+time1_format = %H:%M
+time1_font = sans 8
+time2_format = %d %b
+time2_font = sans 8
+clock_font_color = #D3D3D3 60
+clock_padding = 2 2
+clock_background_id = 4
+clock_tooltip = %A %d %B %Y (s%V)
+clock_lclick_command = calcoo
+clock_rclick_command = orage
+
+#---------------------------------------------
+# BATTERY
+#---------------------------------------------
+battery = 0
+battery_low_status = 7
+battery_low_cmd = notify-send "battery low"
+bat1_font = sans 8
+bat2_font = sans 8
+battery_font_color = #D3D3D3 60
+battery_padding = 2 2
+battery_background_id = 4
+
+#---------------------------------------------
+# MOUSE ACTION ON TASK
+#---------------------------------------------
+mouse_middle = none
+mouse_right = close
+mouse_scroll_up = toggle
+mouse_scroll_down = iconify

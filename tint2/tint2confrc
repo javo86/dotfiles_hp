@@ -1,0 +1,7 @@
+#---------------------------------------------
+# TINT2CONF CONFIG FILE
+default_theme = /home/javo/.config/tint2/.tint2rc_32.un~
+cmd_property = python2 /usr/bin/tintwizard.py
+width = 500
+height = 350
+

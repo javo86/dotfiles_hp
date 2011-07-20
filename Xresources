@@ -1,0 +1,114 @@
+!Xcursor SECTION
+!{{{
+Xcursor.theme: ArchCursorTheme
+!}}}
+
+!Vim SECTION
+!{{{
+!------------------
+!}}}
+
+!URxvt SECTION
+!{{{
+!------------------
+
+!------------------
+!Color scheme
+!------------------
+!{{{
+*foreground:#a49ffe
+*highlightColor:#444
+URxvt*color0: #2B2B2B
+URxvt*color1: #870000
+URxvt*color2: #5F875F
+URxvt*color3: #875F00
+URxvt*color4: #005FAF
+URxvt*color5: #5F5F87
+URxvt*color6: #008787
+URxvt*color7: #818181
+URxvt*color8: #414141
+URxvt*color9: #D70000
+URxvt*color10: #AFD7AF
+URxvt*color11: #D7AF00
+URxvt*color12: #00AFFF
+URxvt*color13: #AFAFD7
+URxvt*color14: #00D7D7
+URxvt*color15: #CECECE
+!}}}
+
+!------------------
+!False tranparency
+!------------------
+!{{{
+!*rxvt.transparent: true
+!*rxvt.shading: 80 
+!}}}
+
+!------------------
+!Alerta visual 
+!------------------
+!{{{
+URxvt*urgentOnBell: true
+!}}}
+
+!------------------
+!True tranparency
+!------------------
+!{{{
+URxvt.depth: 32
+URxvt.background: rgba:0000/0000/0099/9900
+!}}}
+
+!------------------
+!Tabbed URxvt
+!------------------
+!{{{
+URxvt.perl-ext-common:  default,tabbed
+!}}}
+
+!------------------
+!Scrollbar
+!------------------
+!{{{
+!removes Scrollbar
+URxvt*scrollBar:false    
+!}}}
+
+!------------------
+!Alt
+!------------------
+!{{{
+URxvt*meta8: true
+!}}}
+
+!------------------
+!Clickable links
+!------------------
+
+!------------------
+!Key remaps
+!------------------
+!Urxvt*keysym.
+
+!------------------
+!Fonts
+!------------------
+URxvt*font:xft:Inconsolata:size=14:antialias=true:hinting=true
+
+!------------------
+!Named urxvts
+!------------------
+!sysMon
+sysMon*depth: 32
+sysMon*background: rgba:0000/0000/0000/0000
+sysMon*.perl-ext-common:  default
+sysMon*borderLess:true
+
+!comTerm
+comTerm*depth: 32
+comTerm*background: rgba:0000/0000/0000/0000
+comTerm*.perl-ext-common:  default
+comTerm*borderLess:true
+
+!}}}Fin urxvt SECTION
+

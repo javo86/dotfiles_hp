@@ -1,0 +1,104 @@
+#---------------------------------------------
+# TINT2 CONFIG FILE
+#---------------------------------------------
+
+#---------------------------------------------
+# BACKGROUND AND BORDER333333
+#---------------------------------------------
+rounded = 2
+border_width = 1
+background_color = #000000 70
+border_color = #ffffff 17
+
+rounded = 2
+border_width = 0
+background_color = #000000 0
+border_color = #ffffff 80
+
+rounded = 2
+border_width = 0
+background_color = #cccccc 10
+border_color = #000000 0
+
+rounded = 0
+border_width = 0
+background_color = #000000 0
+border_color = #000000 0
+
+#background color forsytemtray
+rounded = 2
+border_width = 0
+background_color = #363636 0
+border_color = #000000 0
+
+#---------------------------------------------
+# PANEL
+#---------------------------------------------
+#panel_items = 
+autohide = 1
+panel_monitor = all
+panel_position = top
+panel_size = 0 24
+panel_margin = 0 0
+panel_padding = 9 1 9
+font_shadow = 0
+panel_background_id = 1
+
+#---------------------------------------------
+# TASKBAR
+#---------------------------------------------
+taskbar_mode = single_desktop
+taskbar_padding = 0 0 2
+taskbar_background_id = 0
+
+#---------------------------------------------
+# TASK
+#---------------------------------------------
+task_icon = 1
+task_text = 0
+task_width = 64
+task_margin = 0 0
+task_centered = 1
+task_padding = 5 3
+task_font = Sans 8
+task_font_color = #ffffff 68
+task_active_font_color = #ffffff 83
+task_background_id = 2
+task_active_background_id = 3
+
+#---------------------------------------------
+# SYSTRAYBAR
+#---------------------------------------------
+systray_padding = 0 3 0
+systray_background_id = 5
+
+#---------------------------------------------
+# CLOCK
+#---------------------------------------------
+time1_format = %H:%M @ %A %d %B
+time1_font = Sans 8
+#time2_format = %A %d %B
+time2_font = Sans 8
+clock_font_color = #ffffff 76
+clock_padding = 2 2
+clock_background_id = 0
+
+#---------------------------------------------
+# BATTERY
+#---------------------------------------------
+battery = 0
+battery_low_status = 0
+battery_low_cmd = notify-send "battery low"
+bat1_font = Sans 8
+bat2_font = Sans 8
+battery_font_color = #000000 0
+battery_padding = 2 2
+battery_background_id = 0
+
+#---------------------------------------------
+# MOUSE ACTION
+#---------------------------------------------
+mouse_middle = none
+mouse_right = none
+mouse_scroll_up = none
+mouse_scroll_down = none

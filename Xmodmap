@@ -1,0 +1,5 @@
+!Make Bloq Mayus another Esc
+! {{{
+clear  lock
+keycode 0x42 = Escape
+! }}}
