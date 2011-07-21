@@ -86,9 +86,10 @@ URxvt*meta8: true
 !------------------
 
 !------------------
-!Key remaps
+!Key maps para vim
 !------------------
-!Urxvt*keysym.
+URxvt*keysym.Mod1-j: \033<Alt-j>
+URxvt*keysym.Mod1-k: \033<Alt-k>
 
 !------------------
 !Fonts
