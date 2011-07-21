@@ -1,6 +1,6 @@
 Pasos para instalar y preparar hp 
 
-instalar según wiki https://wiki.archlinux.org/index.php/Beginners%27_Guide
+instalar según wiki https://wiki.archlinux.org/index.php/Beginners%27_Guide (Antes del post-installation)
 
 Instalar input drivers:
 	pacman -S xf86-video-intel xf86-input-synaptics
@@ -18,19 +18,42 @@ Preparar audio
 Adding User:
 	adduser > seguir script y agregar los siguientes grupos: 
 		audio,lp,optical,storage,video,wheel,games,power,scanner
-
-Instalar gvim,git y rxvt-unicode
-(Aún loggeado como root)
-pacman -S gvim git rxvt-unicode
-
-agregar el repo dotfiles_hp y common
-	git://github.com/javo86/dotfiles_hp.git
-	git://github.com/javo86/common.git
-
 visudo:
 	Permitir miembros de grupo wheel utilizar cualquier comando
 
-crear symlinks de dotfiles_hp en $HOME
+Instalar gvim,git y rxvt-unicode
+	pacman -S gvim git rxvt-unicode
+
+agregar el repo dotfiles_hp y common
+	http://help.github.com/linux-set-up-git/
+	su javo
+	cd
+	mkdir .ssh conf.d
+	ssh-keygen -t rsa -C "mail@mail.com"
+	copiar key de id_rsa.pub en https://github.com/account/ssh
+	Probar que todo funcione
+		ssh -T git@github.com
+	Configurar git
+		git config --global user.name "name"
+		git config --global user.email "email"
+	Set github account token
+		Copiar el token de https://github.com/account/admin
+		git config --global github.user user
+		git config --global github.token token 
+
+	Clonar los siguientes repos
+		cd conf.d 
+		git clone git://github.com/javo86/dotfiles_hp.git
+		git clone git://github.com/javo86/common.git
+
+crear symlinks de conf.d/dotfiles_hp en $HOME
+	cd
+	ln -s ~/conf.d/dotfiles_hp/xinitrc .xinitrc
+	ln -s ~/conf.d/dotfiles_hp/bashrc .bashrc
+	ln -s ~/conf.d/dotfiles_hp/bash_profile .bash_profile
+	ln -s ~/conf.d/dotfiles_hp/bash_aliases .bash_aliases
+	ln -s ~/conf.d/dotfiles_hp/Xresources .Xresources
+	ln -s ~/conf.d/dotfiles_hp/Xmodmap .Xmodmap
 
 iniciar x (startx) como $USER (javo de seguro)
 
@@ -39,6 +62,12 @@ instalar los packages de abajo
 packages:
 	pacman:
 		sudo pacman -S cairo-compmgr conky tint2 colordiff dmenu tmux mutt newsbeuter mpd ncmpcpp acpid lm_sensors feh imagemagick libreoffice firefox weechat bitlbee laptop-mode-tools lxappearance obconf ttf-inconsolata bash-completion  gimp-devel inkscape pm-utils lesspipe unzip unrar apvlv ranger flashplugin ctags ifplugd
+
+Crear sym link para opembox
+	cd
+	mkdir .config
+	cd .config
+	ln -s ~/conf.d/dotfiles_hp/openbox openbox
 
 Instalar yaourt
 http://wiki.archlinux.org/index.php/Yaourt
