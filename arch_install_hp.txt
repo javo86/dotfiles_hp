@@ -1,25 +1,62 @@
-Pasos para instalar y preparar hp
+Pasos para instalar y preparar hp 
+(Basado en https://wiki.archlinux.org/index.php/Beginners%27_Guide)
 
 instalar según wiki
-instalar git,openbox,rxvt-unicode y gvim
 
-agregar el repo dotfiles_hp
+Instalar gvim y git
+
+agregar el repo dotfiles_hp 
+
+Instalar input drivers:
+	pacman -S xf86-video-intel xf86-input-synaptics
+
+Instalar X
+	pacman -S xorg-xinit xorg-server xorg-utils xorg-server-utils openbox
+
+Preparar audio
+	pacman -S alsa-utils alsa-plugins
+	alsamixer > unmute channels
+	speaker-test -c 2 (-c indica los canales para el test)
+	alsactl -f /var/lib/alsa/asound.state store
+	agregar @alsa a daemons en /etc/rc.conf
+
+Instalar terminal emulator
+	pacman -S rxvt-unicode
+
+Adding User:
+	adduser > seguir script y agregar los siguientes grupos: 
+		audio,lp,optical,storage,video,wheel,games,power,scanner
+
+visudo:
+	Permitir miembros de grupo wheel utilizar cualquier comando
+
+crear symlinks de dotfiles_hp en $HOME
+
+iniciar x (startx)
+
 instalar los packages de abajo
 
-
-Gotchas:
-	wireless:
-		https://wiki.archlinux.org/index.php/Broadcom_wireless
-	Login:
-		https://wiki.archlinux.org/index.php/Automatic_login_to_virtual_console
 packages:
 	pacman:
 		pacman -S rxvt-unicode cairo-compmgr conky tint2 colordiff dmenu tmux mutt newsbeuter mpd ncmpcpp acpid lm_sensors feh imagemagick libreoffice firefox weechat bitlbee laptop-mode-tools lxappearance obconf ttf-inconsolata bash-completion  gimp-devel inkscape pm-utils lesspipe unzip unrar apvlv ranger
+
+Instalar yaourt
+http://wiki.archlinux.org/index.php/Yaourt
+
+Instalar los siguientes packages con yaourt
 	yaourt:
 		pacman-color
 		mingetty
 		archey
 		broadcom-wl
+
+Gotchas:
+	wireless:
+		Para tener wifi se ocupa seguir las isntrucciones de esta pagina del wiki
+		https://wiki.archlinux.org/index.php/Broadcom_wireless
+	Login:
+		para poder iniciar automaticamente x, se necesitar seguir estas instrucciones
+		https://wiki.archlinux.org/index.php/Automatic_login_to_virtual_console
 Downloads:
 	fonts:
 		http://uploaded.to/file/2mmzjzjp
