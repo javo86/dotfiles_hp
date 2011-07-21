@@ -1,13 +1,6 @@
 Pasos para instalar y preparar hp 
-(Basado en https://wiki.archlinux.org/index.php/Beginners%27_Guide)
 
-instalar según wiki
-
-Instalar gvim y git
-
-agregar el repo dotfiles_hp y common
-	git://github.com/javo86/dotfiles_hp.git
-	git://github.com/javo86/common.git
+instalar según wiki https://wiki.archlinux.org/index.php/Beginners%27_Guide
 
 Instalar input drivers:
 	pacman -S xf86-video-intel xf86-input-synaptics
@@ -22,25 +15,30 @@ Preparar audio
 	alsactl -f /var/lib/alsa/asound.state store
 	agregar @alsa a daemons en /etc/rc.conf
 
-Instalar terminal emulator
-	pacman -S rxvt-unicode
-
 Adding User:
 	adduser > seguir script y agregar los siguientes grupos: 
 		audio,lp,optical,storage,video,wheel,games,power,scanner
+
+Instalar gvim,git y rxvt-unicode
+(Aún loggeado como root)
+pacman -S gvim git rxvt-unicode
+
+agregar el repo dotfiles_hp y common
+	git://github.com/javo86/dotfiles_hp.git
+	git://github.com/javo86/common.git
 
 visudo:
 	Permitir miembros de grupo wheel utilizar cualquier comando
 
 crear symlinks de dotfiles_hp en $HOME
 
-iniciar x (startx)
+iniciar x (startx) como $USER (javo de seguro)
 
 instalar los packages de abajo
 
 packages:
 	pacman:
-		sudo pacman -S cairo-compmgr conky tint2 colordiff dmenu tmux mutt newsbeuter mpd ncmpcpp acpid lm_sensors feh imagemagick libreoffice firefox weechat bitlbee laptop-mode-tools lxappearance obconf ttf-inconsolata bash-completion  gimp-devel inkscape pm-utils lesspipe unzip unrar apvlv ranger flashplugin ctags 
+		sudo pacman -S cairo-compmgr conky tint2 colordiff dmenu tmux mutt newsbeuter mpd ncmpcpp acpid lm_sensors feh imagemagick libreoffice firefox weechat bitlbee laptop-mode-tools lxappearance obconf ttf-inconsolata bash-completion  gimp-devel inkscape pm-utils lesspipe unzip unrar apvlv ranger flashplugin ctags ifplugd
 
 Instalar yaourt
 http://wiki.archlinux.org/index.php/Yaourt
@@ -59,88 +57,112 @@ Preparar Wireless:
 		sudo touch /etc/modprobe.d/broadcom-wl.conf
 			blacklist b43
 			blacklist ssb
-
+	Crear una regla de udev para que no se intercambien las interfaces en cada reboot
+	sudo touch /etc/udev/rules.d/10-network.rules
+		SUBSYSTEM=="net", ATTR{address}=="aa:bb:cc:dd:ee:ff", NAME="eth0"
+		SUBSYSTEM=="net", ATTR{address}=="ff:ee:dd:cc:bb:aa", NAME="eth1"
+	Agregar los daemons net-auto-wireless y net-auto-wired a la lista de daemons en rc.conf
+	también especificar el WIRELESS_INTERFACE="eth0"(por ejemplo) y WIRED_INTERFACE="eth1"
+	Y agregar los profiles necesarios en /etc/network.d/nombre_profile
+	Se puede basar en los ejemplos de /etc/networ.d/examples
+	Para evitar problemas de que no se reconecte al profile después de un resume, se debe
+	de agregar un hook de /usr/lib/pm-utils/sleep.d/11netcfg a /etc/pm/sleep.d/11netcfg
+		
 Login at boot:
 	para poder iniciar automaticamente x, se necesitar seguir estas instrucciones
 	https://wiki.archlinux.org/index.php/Automatic_login_to_virtual_console
+	https://wiki.archlinux.org/index.php/Start_X_at_Boot#.7E.2F.bash_profile
+	Se necesita de mingetty (ya se instalo, con ayuda de yaourt)
+	Se debe modificar el archivo /etc/inittab con lo siguiente:
+		c1:2345:respawn:/sbin/agetty -8 -s 38400 tty2 linux
+		por
+		c1:2345:respawn:/sbin/mingetty --autologin USERNAME tty1 linux
+	Y se debe de agregar en .bash_profile lo siguiente:
+		if [[ ! $DISPLAY && $(tty) = /dev/tty1 ]]; then
+	  		exec startx
+	  		#Could use xinit instead of startx
+	  		#exec xinit -- /usr/bin/X -nolisten tcp vt7
+		fi
+
+Suspender laptop cuando se cierre el lid
+	Se ocupan diferentes packages para lograrlo facilmente:
+		acpid
+		pm-utils
+	
+	Una vez que se haya instalado pm-utils, se crean unos hooks en /etc/acpi/events/lm_lid
+	y en las acciones /etc/acpi/actions/lm_lid.sh, en este bash script es donde se puede agregar
+	/usr/sbin/pm-suspend, para que la laptop se suspenda cada vez que se cierre el lid
+
+Auto mount usbs
+	https://wiki.archlinux.org/index.php/Udev
+	Con la ayuda de una regla de udev se puede auto mountear los usbs en /media, con su respectiva
+	label si es que la tiene (si no utiliza shdb#). 
+	Se tiene que crear una regla en /etc/udev/rules.d/ por ejemplo 
+	sudo touch /etc/udev/rules.d/11-media-by-label-auto-mount.rules
+
+	KERNEL!="sd[a-z][0-9]", GOTO="media_by_label_auto_mount_end"
+
+	# Import FS infos
+	IMPORT{program}="/sbin/blkid -o udev -p %N"
+
+	# Get a label if present, otherwise specify one
+	ENV{ID_FS_LABEL}!="", ENV{dir_name}="%E{ID_FS_LABEL}"
+	ENV{ID_FS_LABEL}=="", ENV{dir_name}="usbhd-%k"
+
+	# Global mount options
+	ACTION=="add", ENV{mount_options}="relatime"
+	# Filesystem-specific mount options
+	ACTION=="add", ENV{ID_FS_TYPE}=="vfat|ntfs", ENV{mount_options}="$env{mount_options},utf8,gid=100,umask=002"
+
+	# Mount the device
+	ACTION=="add", RUN+="/bin/mkdir -p /media/%E{dir_name}", RUN+="/bin/mount -o $env{mount_options} /dev/%k /media/%E{dir_name}"
+
+	# Clean up after removal
+	ACTION=="remove", ENV{dir_name}!="", RUN+="/bin/umount -l /media/%E{dir_name}", RUN+="/bin/rmdir /media/%E{dir_name}"
+
+	# Exit
+	LABEL="media_by_label_auto_mount_end"
+
+
+Poder reboot or shutdown sin tener que escribir password
+	https://bbs.archlinux.org/viewtopic.php?pid=680826#p680826
+	Para poder utilizar esos comandos sin tener que escribir el password, se debe modificar el archivo
+	sudoers con lo siguiente (se agrega al final):
+		sudo visudo
+			USER ALL=NOPASSWD: /sbin/shutdown	
+
+Configurar:
+
+Openbox
+	La mayor parte de los keybindings que utilizo ya esta, falta adecuar el root-menu
+
+dmenu:
+	Falta crear scripts para manejar mpd con ayuda de dmenu
+
+mutt:
+	Falta configurarlo para poder utilizar diferentes cuentas de gmail y hotmail y trabajo
+
+newsbeuter:
+	En el repo common tengo las diferentes urls de rss que sigo
+
+tmux:
+	Este repo ya incluye la configuración de tmux en tmux.conf, falta agregar la script
+	para iniciar con el layout que me gusta 
+
+weechat & bitlbee:
+	Este repo ya incluye las configuraciones de los servidores y channels que me gustan
+
+vim:
+	Ya se tiene las configuraciones en el repo common
+
+TODO:
+Notifaciones cuando netcfg se conecta a una red y cuando se desconecta
+a
 
 Downloads:
-	fonts:
+	Cursors:
 		http://uploaded.to/file/2mmzjzjp
 
 Daemons:
-hwclock @syslog-ng @alsa @laptop-mode net-auto-wireless @dbus @acpid !network @netfs @crond
+hwclock @syslog-ng @alsa @laptop-mode net-auto-wired net-auto-wireless @dbus @acpid !network @netfs @crond
 
-
-packages:
-	System:
-		terminal emulator:
-			urxvt
-		dotfiles:
-			repos en git:
-				common
-				dotfiles
-					git://github.com/javo86/dotfiles_hp.git
-		Power Management:
-			laptop-mode-tools
-			acpid
-		System monitor:
-			conky
-			lm_sensor
-		X:
-			openbox
-			tint2
-		Network:
-			netcfg2:
-				wpa_actiond
-		Misc:
-			git
-			lxappearance
-			obconf
-			dmenu
-			tmux
-	Media:
-		feh
-		imagemagick
-		mpd
-		ncmpcpp
-		mplayer
-	www:
-		weechat
-		bitlbee
-		newsbeuter
-		elinks
-		firefox:
-			noscript
-			delicious
-			web tools
-			measure it
-			vimperator
-			colorzilla
-			firebug
-	Devel:
-		python2
-		Web:
-			LAMP:
-				apache2
-				php
-				mysql
-				mod_wsgi
-			Web-Tools:
-				Magento
-				Joomla
-				Drupal
-				Django
-				CI
-				Wordpress
-	Office:
-		[G]vim
-		libreoffice:
-			diccionarios español:
-	Diseño:
-		Web:
-			inkscape
-			gimp
-
-	Optional:
-		awesome
