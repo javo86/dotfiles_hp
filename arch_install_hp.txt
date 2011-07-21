@@ -5,7 +5,7 @@ instalar según wiki https://wiki.archlinux.org/index.php/Beginners%27_Guide (An
 Instalar input drivers:
 	pacman -S xf86-video-intel xf86-input-synaptics
 
-Instalar X
+Instalar X & openbox
 	pacman -S xorg-xinit xorg-server xorg-utils xorg-server-utils openbox
 
 Preparar audio
@@ -54,6 +54,8 @@ crear symlinks de conf.d/dotfiles_hp en $HOME
 	ln -s ~/conf.d/dotfiles_hp/bash_aliases .bash_aliases
 	ln -s ~/conf.d/dotfiles_hp/Xresources .Xresources
 	ln -s ~/conf.d/dotfiles_hp/Xmodmap .Xmodmap
+	ln -s ~/conf.d/common/dotvim .vim
+	ln -s ~/conf.d/common/dotvim/vimrc .vimrc
 
 iniciar x (startx) como $USER (javo de seguro)
 
@@ -62,8 +64,16 @@ instalar los packages de abajo
 packages:
 	pacman:
 		sudo pacman -S cairo-compmgr conky tint2 colordiff dmenu tmux mutt newsbeuter mpd ncmpcpp acpid lm_sensors feh imagemagick libreoffice firefox weechat bitlbee laptop-mode-tools lxappearance obconf ttf-inconsolata bash-completion  gimp-devel inkscape pm-utils lesspipe unzip unrar apvlv ranger flashplugin ctags ifplugd
+	
+Se agregan los siguientes daemons al /etc/rc.conf
+	Daemons:
+		hwclock @syslog-ng @alsa @laptop-mode net-auto-wired net-auto-wireless laptop-mode @dbus @acpid !network @netfs @crond
+	Se inicia manualmente los siguientes daemons:
+		sudo /etc/rc.d/acpid start
+		sudo /etc/rc.d/laptop-mode start
+	O se da reboot
 
-Crear sym link para opembox
+Crear sym link para openbox
 	cd
 	mkdir .config
 	cd .config
@@ -180,18 +190,16 @@ tmux:
 
 weechat & bitlbee:
 	Este repo ya incluye las configuraciones de los servidores y channels que me gustan
+	TODO: Instrucciones para el setup de weechat y bitlbee
 
 vim:
 	Ya se tiene las configuraciones en el repo common
 
 TODO:
 Notifaciones cuando netcfg se conecta a una red y cuando se desconecta
-a
 
 Downloads:
 	Cursors:
 		http://uploaded.to/file/2mmzjzjp
 
-Daemons:
-hwclock @syslog-ng @alsa @laptop-mode net-auto-wired net-auto-wireless @dbus @acpid !network @netfs @crond
 
