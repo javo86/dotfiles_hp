@@ -57,7 +57,12 @@ alias pacqs='pacman -Qs'             # Search for package(s) in the local databa
 alias pacupd='sudo pacman -Sy && sudo abs'     # Update and refresh the local package and ABS databases against repositories
 alias pacinsd='sudo pacman -S --asdeps'        # Install given package(s) as dependencies of another package
 alias pacmir='sudo pacman -Syy'                # Force refresh of all package lists after updating /etc/pacman.d/mirrorlist
+# }}}
 
+# Power commans
+# {{{
+alias reboot='sudo shutdown -r now'
+alias shutdown='sudo shutdown -h now'
 # }}}
 
 # safety features
