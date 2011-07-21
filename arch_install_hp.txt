@@ -1,5 +1,11 @@
-	Pasos para instalar y preparar hp
+Pasos para instalar y preparar hp
+
 instalar según wiki
+instalar git y gvim
+
+agregar el repo dotfiles_hp
+instalar los packages de abajo
+
 
 Gotchas:
 	wireless:
@@ -8,7 +14,7 @@ Gotchas:
 		https://wiki.archlinux.org/index.php/Automatic_login_to_virtual_console
 packages:
 	pacman:
-		pacman -S rxvt-unicode cairo-compmgr conky tint2 colordiff dmenu tmux mutt newsbeuter mpd ncmpcpp openbox acpid lm_sensors feh imagemagick libreoffice firefox weechat bitlbee laptop-mode-tools lxappearance obconf ttf-inconsolata bash-completion  gimp-devel inkscape pm-utils lesspipe unzip unrar apvlv
+		pacman -S rxvt-unicode cairo-compmgr conky tint2 colordiff dmenu tmux mutt newsbeuter mpd ncmpcpp openbox acpid lm_sensors feh imagemagick libreoffice firefox weechat bitlbee laptop-mode-tools lxappearance obconf ttf-inconsolata bash-completion  gimp-devel inkscape pm-utils lesspipe unzip unrar apvlv ranger
 	yaourt:
 		pacman-color
 		mingetty
@@ -19,7 +25,7 @@ Downloads:
 		http://uploaded.to/file/2mmzjzjp
 
 Daemons:
-hwclock @syslog-ng @alsa @laptop-mode net-auto-wireless @acpid !network @netfs @crond
+hwclock @syslog-ng @alsa @laptop-mode net-auto-wireless @dbus @acpid !network @netfs @crond
 
 
 packages:
