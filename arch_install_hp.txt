@@ -36,7 +36,7 @@ packages:
 			repos en git:
 				common
 				dotfiles
-					git@github.com:javo86/dotfiles_hp.git
+					git://github.com/javo86/dotfiles_hp.git
 		Power Management:
 			laptop-mode-tools
 			acpid
